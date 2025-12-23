@@ -2,11 +2,77 @@
 #include "Player/AuraPlayerController.h"
 #include "EnhancedInputSubsystems.h" // 必须包含：用于获取增强输入子系统
 #include "EnhancedInputComponent.h" // 必须包含：用于绑定输入动作
+#include "Interfaceaction/EnemyInterface.h"
+#include "Runtime/ApplicationCore/Internal/GenericPlatform/CursorUtils.h"
 
 AAuraPlayerController::AAuraPlayerController()
 {
     // 开启网络复制：如果是多人游戏，这个控制器需要同步数据
     bReplicates = true;
+}
+
+void AAuraPlayerController::PlayerTick(float DeltaTime)
+{
+    Super::PlayerTick(DeltaTime);
+    CursorTrace();
+}
+
+void AAuraPlayerController::CursorTrace()
+{
+    FHitResult CursorHit;
+    GetHitResultUnderCursor(ECC_Visibility,false,CursorHit);
+    if (!CursorHit.bBlockingHit) return;
+    
+    LastActor = ThisActor;
+    ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());
+    
+    /**
+     * Line trance from cursor. There are several scenarios;
+     * A. LastActor is null && ThisActor is null
+     *      - Do nothing.
+     * B. LastActor is null && ThisActor is valid
+     *      - Highlight ThisActor
+     * C. LastAcotr is valid && ThisActor is null
+     *      - UnHighlight ThisActor
+     * D. Both actor are valid, but LastActor != ThisActor
+     *      - UnHighlight LastActor , and Highlight ThisActor
+     * E. Both actors are valid, and are the same actor
+     *      - Do nothing
+     */
+    
+    if (LastActor == nullptr)
+    {
+        if (ThisActor != nullptr)
+        {
+            // Case B
+            ThisActor ->HighlightActor();
+        }
+        else
+        {
+            // Case A - Both are null, do nothing
+        }
+    }
+    else // LastActor is valid 
+    {
+        if (ThisActor == nullptr)
+        {
+            // Case C
+            LastActor->UnHighlightActor();
+        }
+        else // Both actors are valid
+        {
+            if (LastActor != ThisActor)
+            {
+                // Case D - UnHighlight LastActor ,Highlight ThisActor
+                LastActor->UnHighlightActor();
+                ThisActor->HighlightActor();
+            }
+            else
+            {
+                // Case E - Do nothing
+            }
+        }
+    }
 }
 
 void AAuraPlayerController::BeginPlay()

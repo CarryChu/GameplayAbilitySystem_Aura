@@ -10,6 +10,7 @@
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class IEnemyInterface;
 
 /**
  * AAuraPlayerController
@@ -21,7 +22,7 @@ class AURA_API AAuraPlayerController : public APlayerController
 	GENERATED_BODY()
 public:
 	AAuraPlayerController();
-    
+    virtual void PlayerTick(float DeltaTime) override;
 protected:
 	// 游戏开始时执行一次，用于初始化数据
 	virtual void BeginPlay() override;
@@ -45,4 +46,8 @@ private:
 	// 当 MoveAction 被触发时（比如玩家按住了 W），引擎会自动调用这个函数
 	// InputActionValue 包含了具体的输入值（比如 Vector2D: X=1, Y=0）
 	void Move(const FInputActionValue& InputActionValue);
+	
+	void CursorTrace();
+	IEnemyInterface* LastActor;
+	IEnemyInterface* ThisActor;
 };

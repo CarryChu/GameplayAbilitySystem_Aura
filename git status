@@ -1,0 +1,35 @@
+[33mcommit a32aa62e5d99da4206a6701ba94ab6b635216049[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: CarryChu <1521487209@qq.com>
+Date:   Sat Dec 20 14:41:09 2025 +0800
+
+    Movement Input And Game Mode
+
+[33mcommit e081b7f8fce8402b21423dd1e93e3acd81f36016[m
+Author: CarryChu <1521487209@qq.com>
+Date:   Fri Dec 19 17:17:01 2025 +0800
+
+    Aura Player Controller
+
+[33mcommit a4716c9c7037e73e685ec7a9155f1d819e82a428[m
+Author: CarryChu <1521487209@qq.com>
+Date:   Fri Dec 19 15:29:09 2025 +0800
+
+    Enhanced Input
+
+[33mcommit 25721e4da8724ee84182fd75524cc4486ab49ca5[m
+Author: CarryChu <1521487209@qq.com>
+Date:   Thu Dec 18 18:31:38 2025 +0800
+
+    Player and Enemy Characters
+
+[33mcommit 4050335d31af3cbc95d89933f0296a19a687e0eb[m
+Author: CarryChu <1521487209@qq.com>
+Date:   Thu Dec 18 18:15:10 2025 +0800
+
+    The Base Character Class
+
+[33mcommit 1096703b0912d0afe4aaed111afb774389b99fc1[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: CarryChu <1521487209@qq.com>
+Date:   Wed Dec 17 20:06:07 2025 +0800
+
+    Initial Project Files
