@@ -16,6 +16,8 @@ AAuraPlayerState::AAuraPlayerState()
 	// 必须开启复制，否则客户端无法使用技能
 	AbilitySystemComponent->SetIsReplicated(true);
 	
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
+	
 	// 创建属性集
 	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("AttributeSet");
 	

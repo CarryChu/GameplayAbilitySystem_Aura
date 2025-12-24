@@ -18,6 +18,8 @@ AAuraEnemy::AAuraEnemy()
 	// 所以 OwnerActor 和 AvatarActor 都是敌人自己。
 	AbilitySystemComponent = CreateDefaultSubobject<UAuraAbilitySystemComponent>("AbilitySystemComponent");
 	
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+	
 	// 开启网络复制，确保多人游戏中服务器的技能状态能同步给客户端
 	AbilitySystemComponent->SetIsReplicated(true);
 	
@@ -37,4 +39,11 @@ void AAuraEnemy::UnHighlightActor()
 {
 	GetMesh()->SetRenderCustomDepth(false);
 	Weapon->SetRenderCustomDepth(false);
+}
+
+void AAuraEnemy::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	AbilitySystemComponent->InitAbilityActorInfo(this,this);
 }
